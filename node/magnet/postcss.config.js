@@ -1,39 +1,40 @@
 // tooling
-const path = require('path');
-const sass = require('node-sass');
+const merge = require('merge-source-map');
+const path  = require('path');
+const sass  = require('node-sass');
 
 // postcss configuration
 module.exports = (ctx) => ({
-  map: ctx.options.map,
-  plugins: [
-    // sass compatibility
-    postcssSass(),
+	map: ctx.options.map,
+	plugins: [
+		// sass compatibility
+		postcssNodeSass(),
 
-    // future compatibility
-    require('postcss-selector-matches')(),
-    require('postcss-selector-not')(),
-    require('postcss-replace-overflow-wrap')(),
+		// future compatibility
+		require('postcss-selector-matches')(),
+		require('postcss-selector-not')(),
+		require('postcss-replace-overflow-wrap')(),
 
-    // backward compatibility
-    require('postcss-svg')({
-      dirs: [ path.join(process.cwd(), 'static/images')  ],
-      svgo: true
-    }),
+		// backward compatibility
+		require('postcss-svg')({
+			dirs: [ path.join(process.cwd(), 'static/images')  ],
+			svgo: true
+		}),
 
-    // backward compatibility
-    require('autoprefixer')(),
+		// backward compatibility
+		require('autoprefixer')(),
 
-    // compression
-    require('postcss-discard-comments')(),
-    require('cssnano')({
-      preset: ['default', {
-        discardComments: true,
-        normalizeUrl: false,
-        svgo: false
-      }]
-    }),
-    compress()
-  ]
+		// compression
+		require('postcss-discard-comments')(),
+		require('cssnano')({
+			preset: ['default', {
+				discardComments: true,
+				normalizeUrl: false,
+				svgo: false
+			}]
+		}),
+		compress()
+	]
 });
 
 // tooling
@@ -41,53 +42,96 @@ const postcss = require('postcss');
 
 // plugin
 const compress = postcss.plugin('postcss-discard-tested-duplicate-declarations', (opts) => (root) => {
-  const testProp  = opts && 'testProp' in opts ? opts.testProp : (prop) => !/^:*-/.test(prop);
-  const testValue = opts && 'testValue' in opts ? opts.testValue : (value) => !/(^var|^\s*-|\s+-\w+-)/.test(value);
+	const testProp  = opts && 'testProp' in opts ? opts.testProp : (prop) => !/^:*-/.test(prop);
+	const testValue = opts && 'testValue' in opts ? opts.testValue : (value) => !/(^var|^\s*-|\s+-\w+-)/.test(value);
 
-  root.walkRules((rule) => {
-    var propsMap = {};
+	root.walkRules((rule) => {
+		var propsMap = {};
 
-    rule.nodes.slice(0).forEach((decl) => {
-      if (testProp(decl.prop) && testValue(decl.value)) {
-        const prevDecl = propsMap[decl.prop];
+		rule.nodes.slice(0).forEach((decl) => {
+			if (testProp(decl.prop) && testValue(decl.value)) {
+				const prevDecl = propsMap[decl.prop];
 
-        if (prevDecl) {
-          if (testValue(prevDecl.value)) {
-            if (decl.import || !prevDecl.import) {
-              prevDecl.remove();
+				if (prevDecl) {
+					if (testValue(prevDecl.value)) {
+						if (decl.import || !prevDecl.import) {
+							prevDecl.remove();
 
-              propsMap[decl.prop] = decl;
-            } else {
-              decl.remove();
-            }
-          }
-        } else {
-          propsMap[decl.prop] = decl;
-        }
-      }
-    })
-  });
+							propsMap[decl.prop] = decl;
+						} else {
+							decl.remove();
+						}
+					}
+				} else {
+					propsMap[decl.prop] = decl;
+				}
+			}
+		})
+	});
 });
 
-// sass
-const postcssSass = postcss.plugin('postcss-node-sass', () => (css, result) => {
-  // result options with a forced inline sourcemap
-  const resultOpts = Object.assign({}, result.opts, { map: { inline: true } });
+// transform css with sass
+const postcssNodeSass = postcss.plugin('postcss-node-sass', opts => (root, result) => {
+	// postcss options
+	const postOpts = Object.assign({}, result.opts, requiredPostOpts);
 
-  // result-css
-  const resultCSS = css.toResult(resultOpts).css;
+	// postcss results
+	const { css: postCSS, map: postMap } = root.toResult(postOpts);
 
-  // sass options
-  const sassOpts = { file: resultOpts.from, outFile: resultOpts.from, data: resultCSS, sourceMap: true, sourceMapContents: true };
+	// sass options
+	const sassOpts = Object.assign({}, opts, requiredSassOpts, {
+		file: postOpts.from,
+		outFile: postOpts.to,
+		data: postCSS
+	});
 
-  // css to sass-object promise
-  const sassPromise = new Promise((resolve, reject) => sass.render(sassOpts, (error, result) => error ? reject(error) : resolve(result)));
-
-  // sass-object to postcss-ast promise
-  const postcssPromise = sassPromise.then(({ css, map }) => postcss.parse(css.toString(), Object.assign(resultOpts, { map: { prev: map.toString() } })));
-
-  // updated postcss ast promise
-  const updatePromise = postcssPromise.then(newcss => result.root.removeAll().append(...newcss.nodes));
-
-  return updatePromise;
+	return new Promise(
+		// promise sass results
+		(resolve, reject) => sass.render(
+			sassOpts,
+			(error, sassResult) => error ? reject(error) : resolve(sassResult)
+		)
+	).then(
+		// promise sass to postcss ast
+		({ css: sassCSS, map: sassMap }) => new Promise(
+			resolve => {
+				resolve(
+					merge(
+						postMap.toJSON(),
+						JSON.parse(sassMap)
+					)
+				);
+			}
+		).catch(
+			() => JSON.parse(sassMap)
+		).then(
+			map => postcss.parse(
+				sassCSS.toString(),
+				{
+					from: postOpts.from,
+					map
+				}
+			)
+		)
+	).then(
+		// promise root as postcss ast
+		newroot => {
+			result.root = newroot;
+		}
+	);
 });
+
+const requiredPostOpts = {
+	map: {
+		annotation: false,
+		inline: false,
+		sourcesContent: true
+	}
+};
+
+const requiredSassOpts = {
+	omitSourceMapUrl: true,
+	sourceMap: true,
+	sourceMapContents: true
+};
+

@@ -27,12 +27,13 @@
     "eslint-config-liferay": "^1.0.2",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-react": "^7.4.0",
-    "node-sass": "^4.5.3",
+    "merge-source-map": "^1.0.4",
+    "node-sass": "^4.7.2",
     "postcss-cli": "^4.1.1",
     "postcss-replace-overflow-wrap": "^2.0.0",
     "postcss-selector-matches": "^3.0.1",
     "postcss-selector-not": "^3.0.1",
-    "postcss-svg": "^2.2.0",
+    "postcss-svg": "^2.3.0",
     "prettier": "^1.7.4"
   },
   "browserslist": [
