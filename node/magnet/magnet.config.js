@@ -6,6 +6,7 @@ module.exports = {
     pluginsConfig: {
       metal: {
         src: ['src/**/*.js'],
+        soyDeps: ['node_modules/marble*/src/**/*.soy'],
         soySrc: ['src/**/*.soy'],
         soyDest: ['src'],
       },
