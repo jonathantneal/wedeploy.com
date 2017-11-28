@@ -20,9 +20,37 @@ export default class Bubbles extends Component {
     if (isServerSide()) {
       return;
     }
+
     this.setupBubbles();
     this.generatePerlinNoise();
-    this.startAnimation();
+    this.prepareAnimation();
+  }
+
+  prepareAnimation() {
+    let top, timeout;
+
+    const onscroll = event => {
+      // conditionally update an undefined top
+      if (top === undefined) {
+        top = this.element.getBoundingClientRect().top + window.pageYOffset;
+      }
+
+      // allow the top to be refreshed after a debounce
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        top = undefined;
+      }, 400);
+
+      // undo the listener and begin the animation if the top has been passed
+      if (window.innerHeight + window.pageYOffset >= top) {
+        window.removeEventListener('scroll', onscroll);
+
+        this.startAnimation();
+      }
+    };
+
+    window.addEventListener('scroll', onscroll);
   }
 
   disposed() {
