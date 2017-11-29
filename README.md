@@ -28,11 +28,11 @@ To work on the landing page itself;
    npm run build && npm run build:css
    ```
 
-3. Start the local server and watch for file changes(run these in separate
+3. Start the local server and watch for file changes (run these in separate
    tabs):
 
    ```sh
-   npm dev
+   npm run dev
    ```
 
    ```sh
