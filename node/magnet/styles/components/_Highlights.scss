@@ -70,7 +70,7 @@
 .highlights-summary {
   @include unset-p;
 
-  color: rgba($black, .9);
+  color: rgba($primary, .9);
   font-size: 16px;
   line-height: 24px;
   margin-top: 18px;
@@ -83,7 +83,7 @@
   @include features;
 
   & > ::before {
-    content: url("features.svg" param(--color $green));
+    content: url("features.svg" param(--color $color-green));
   }
 
   & > :nth-child(n+2) {

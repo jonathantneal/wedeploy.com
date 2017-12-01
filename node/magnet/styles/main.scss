@@ -1,25 +1,29 @@
 /* WeDeploy.com
 /* ========================================================================== */
 
-@import "./base/font-face"; /* import and font-face must come first */
+$font-family-base: "Circular Std", sans-serif;
 
-@import "./base/colors"; /* color variables must come first */
+@import "marble/src/marble.scss";
+
+$color-green: mix($color-green, $black, 80%);
+
 @import "./base/custom-media"; /* custom-media variables must come first */
 @import "./base/normalize"; /* normalize mixins must come first */
 @import "./base/unset"; /* unset mixins must come first */
 
 @import "./base/actions";
 @import "./base/buttons";
-@import "./base/document";
 @import "./base/features";
-@import "./base/focus-ring";
 @import "./base/heading-symbol";
 @import "./base/inset";
-@import "./base/reset";
 @import "./base/underline";
 
+@import "./base/font-face";
+
+@import "./base/document";
+@import "./base/focus-ring";
+
 @import "./components/Header";
-@import "./components/HeaderNav";
 @import "./components/Start";
 @import "./components/StartDemo";
 @import "./components/Highlights";

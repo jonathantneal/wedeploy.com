@@ -66,9 +66,10 @@
 }
 
 .answers-group-heading {
-  @include unset-p;
+  @include unset-h;
 
   font-size: 18px;
+  font-weight: 700;
   line-height: 24px;
   padding-left: calc(24px + 18px);
   position: relative;
@@ -116,6 +117,7 @@
   @include unset-h;
 
   font-weight: 900;
+  line-height: inherit;
   margin-right: .375em;
 }
 
@@ -129,7 +131,7 @@
     background-repeat: no-repeat;
     background-position: calc(200% - .5px) 100%;
     background-size: 200% 2px;
-    color: $green;
+    color: $color-green;
     display: inline-block;
     padding-bottom: 6px;
     transition: background-position 250ms;

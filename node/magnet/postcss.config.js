@@ -7,7 +7,9 @@ module.exports = (ctx) => ({
   map: ctx.options.map,
   plugins: [
     // sass compatibility
-    postcssSass(),
+    postcssSass({
+      includePaths: ['node_modules']
+    }),
 
     // future compatibility
     require('postcss-selector-matches')(),
@@ -70,7 +72,7 @@ const compress = postcss.plugin('postcss-discard-tested-duplicate-declarations',
 });
 
 // sass
-const postcssSass = postcss.plugin('postcss-node-sass', () => (css, result) => {
+const postcssSass = postcss.plugin('postcss-node-sass', opts => (css, result) => {
   // result options with a forced inline sourcemap
   const resultOpts = Object.assign({}, result.opts, { map: { inline: true } });
 
@@ -78,7 +80,7 @@ const postcssSass = postcss.plugin('postcss-node-sass', () => (css, result) => {
   const resultCSS = css.toResult(resultOpts).css;
 
   // sass options
-  const sassOpts = { file: resultOpts.from, outFile: resultOpts.from, data: resultCSS, sourceMap: true, sourceMapContents: true };
+  const sassOpts = Object.assign({}, opts, { file: resultOpts.from, outFile: resultOpts.from, data: resultCSS, sourceMap: true, sourceMapContents: true });
 
   // css to sass-object promise
   const sassPromise = new Promise((resolve, reject) => sass.render(sassOpts, (error, result) => error ? reject(error) : resolve(result)));

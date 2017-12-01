@@ -52,7 +52,7 @@
 }
 
 .header-brand-text {
-  fill: $black;
+  fill: $primary;
   transition: fill 2s ease-in-out;
 
   .start--3 & {
@@ -60,7 +60,7 @@
   }
 
   [data-expanded="true"] & {
-    fill: $black;
+    fill: $primary;
     transition: fill .3s ease-in-out;
   }
 }

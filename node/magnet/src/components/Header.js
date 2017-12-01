@@ -1,6 +1,5 @@
 import Component from 'metal-component';
 import Soy from 'metal-soy';
-import Topbar from 'marble-topbar';
 import templates from './Header.soy.js';
 import {isServerSide} from 'metal';
 
