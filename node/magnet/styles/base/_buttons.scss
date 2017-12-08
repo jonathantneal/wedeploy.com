@@ -25,19 +25,19 @@
 @mixin black-button {
   @include button;
 
-  background-color: $black;
+  background-color: $primary;
 
   &:hover, &:focus {
-    background-color: rgba($black, .8);
+    background-color: rgba($primary, .8);
   }
 }
 
 @mixin green-button {
   @include button;
 
-  background-color: $green;
+  background-color: $color-green;
 
   &:hover, &:focus {
-    background-color: rgba($green, .8);
+    background-color: rgba($color-green, .8);
   }
 }

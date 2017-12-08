@@ -2,11 +2,6 @@
 /* ========================================================================== */
 
 @mixin header-padding-inline {
-  @media ($s-nav) {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
   @media ($l-nav) and (max-width: 1685px) {
     padding-left: 36px;
     padding-right: 36px;
@@ -26,14 +21,14 @@
   top: 0;
   left: 0;
   right: 0;
-  padding-bottom: 18px;
-  padding-top: 18px;
   position: absolute;
   transition: background-color .3s;
-  z-index: 1;
+  z-index: 1001;
 
   @media ($l-nav) {
     margin-left: -6px;
+    padding-bottom: 18px;
+    padding-top: 18px;
   }
 
   [data-expanded="true"] & {
@@ -52,7 +47,7 @@
 }
 
 .header-brand-text {
-  fill: $black;
+  fill: $primary;
   transition: fill 2s ease-in-out;
 
   .start--3 & {
@@ -60,7 +55,95 @@
   }
 
   [data-expanded="true"] & {
-    fill: $black;
+    fill: $primary;
     transition: fill .3s ease-in-out;
+  }
+}
+
+/* Navigation
+/* ========================================================================== */
+
+.topbar {
+  padding: 18px 24px;
+  width: 100%;
+}
+
+.topbar.topbar-light, .topbar-light .topbar-list {
+  background-color: transparent;
+
+  .topbar-canvas-expanded & {
+    background-color: $white;
+    color: $primary;
+  }
+
+  .start--3 & {
+    color: $white;
+
+    .topbar-toggle:hover {
+      color: $white;
+    }
+
+    .topbar-canvas-expanded & {
+      background-color: $white;
+      color: $primary;
+
+      .topbar-toggle:hover {
+        color: $primary;
+      }
+    }
+  }
+}
+
+.topbar-logo-image {
+  width: 161px;
+  height: 42px;
+}
+
+:last-child > .topbar-link {
+  @media ($s-nav) {
+    color: $color-green;
+  }
+
+  @media ($l-nav) {
+    margin-left: 12px;
+    position: relative;
+  }
+
+  &::before {
+    @media ($l-nav) {
+      color: rgba($black, .4);
+      content: "or";
+      display: inline-block;
+      font-size: 12px;
+      right: 100%;
+      position: absolute;
+      text-align: center;
+      width: 12px;
+    }
+  }
+
+  &::after {
+    @media ($s-nav) {
+      content: url("symbol-arrow.svg" param(--color $color-green));
+      display: inline-block;
+      top: -2px;
+      margin-left: 12px;
+      position: relative;
+      width: 10px;
+      height: 8px;
+      transition: transform .3s ease-in-out;
+    }
+  }
+
+  &:hover::after, &:focus::after {
+    @media ($s-nav) {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.topbar .btn {
+  @media ($s-nav) {
+    margin: 3px 12px;
   }
 }

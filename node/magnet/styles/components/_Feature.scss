@@ -20,7 +20,7 @@
   }
 
   &.-auth {
-    background-color: mix($white, $black, 98%);
+    background-color: mix($white, $primary, 98%);
   }
 }
 
@@ -72,7 +72,7 @@
 .feature-summary {
   @include unset-p;
 
-  color: rgba($black, .8);
+  color: rgba($primary, .8);
   font-size: 16px;
   line-height: 24px;
   margin-top: 24px;
@@ -81,7 +81,7 @@
 .feature-more-summary {
   @include unset-p;
 
-  color: rgba($black, .8);
+  color: rgba($primary, .8);
   font-size: 16px;
   line-height: 24px;
   margin-top: 18px;
@@ -90,7 +90,7 @@
     @include unset-a;
     @include underline;
 
-    color: $green;
+    color: $color-green;
   }
 }
 
@@ -141,7 +141,7 @@
 }
 
 .-data .feature-features > ::before {
-  content: url("features.svg" param(--color $yellow));
+  content: url("features.svg" param(--color $color-yellow));
 }
 
 .feature-more-heading.-sync::before {
@@ -172,7 +172,7 @@
 }
 
 .-email .feature-features > ::before {
-  content: url("features.svg" param(--color $orange));
+  content: url("features.svg" param(--color $color-orange));
 }
 
 .feature-more-heading.-send::before {
@@ -197,7 +197,7 @@
 }
 
 .-auth .feature-features > ::before {
-  content: url("features.svg" param(--color $violet));
+  content: url("features.svg" param(--color $color-violet));
 }
 
 .feature-more-heading.-store::before {
@@ -228,7 +228,7 @@
 }
 
 .-hosting .feature-features > ::before {
-  content: url("features.svg" param(--color $red));
+  content: url("features.svg" param(--color $color-red));
 }
 
 /* Feature: Deploy

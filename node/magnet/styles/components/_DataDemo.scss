@@ -40,7 +40,7 @@ $auth-demo-overflow-end: 60px;
 /* ========================================================================== */
 
 .group-source {
-  background-color: $black;
+  background-color: $primary;
   color: $white;
   min-height: 200px;
   position: relative;
@@ -94,7 +94,7 @@ $auth-demo-overflow-end: 60px;
   & button {
     @include unset-button;
 
-    color: rgba($black, .8);
+    color: rgba($primary, .8);
     cursor: pointer;
     font-size: 14px;
     line-height: 24px;
@@ -107,7 +107,7 @@ $auth-demo-overflow-end: 60px;
     padding-right: 6px;
 
     &::before {
-      background-color: rgba($black, .2);
+      background-color: rgba($primary, .2);
       border-radius: 2px;
       display: inline-block;
       margin-right: 12px;
@@ -119,11 +119,11 @@ $auth-demo-overflow-end: 60px;
   }
 
   & :matches(:hover, :focus) span::before {
-    background-color: rgba($black, .9);
+    background-color: rgba($primary, .9);
   }
 
   & .is-active span::before {
-    background-color: rgba($black, .9);
+    background-color: rgba($primary, .9);
   }
 
   & .is-web span::before {
@@ -140,11 +140,11 @@ $auth-demo-overflow-end: 60px;
 }
 
 .menu-source--datademo .is-active span {
-  box-shadow: inset 0 -3px 0 0 $yellow;
+  box-shadow: inset 0 -3px 0 0 $color-yellow;
 }
 
 .menu-source--authdemo .is-active span {
-  box-shadow: inset 0 -3px 0 0 $violet;
+  box-shadow: inset 0 -3px 0 0 $color-violet;
 }
 
 .panel-source {
@@ -166,10 +166,16 @@ $auth-demo-overflow-end: 60px;
   & pre {
     @include unset-pre;
 
-    font-family: "Roboto Mono", "ArialUnicodeMS", monospace;
+    background-color: inherit;
+    border: 0;
+    border-radius: 0;
+    color: inherit;
+    font-family: $font-mono;
     font-size: 12px;
     font-weight: 500;
     line-height: 30px;
+    padding: 0;
+    margin: 0;
   }
 }
 
@@ -185,19 +191,19 @@ $auth-demo-overflow-end: 60px;
   }
 
   & :matches(.hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-template-variable, .hljs-attribute, .hljs-link) {
-    color: $blue;
+    color: $color-blue;
   }
 
   & :matches(.hljs-string, .hljs-symbol, .hljs-bullet, .hljs-regexp) {
-    color: $yellow;
+    color: $color-yellow;
   }
 
   & :matches(.hljs-number, .hljs-addition) {
-    color: $green;
+    color: $color-green;
   }
 
   & :matches(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class) {
-    color: $violet;
+    color: $color-violet;
   }
 }
 
@@ -227,7 +233,7 @@ $auth-demo-overflow-end: 60px;
     @include unset-a;
 
     background: rgba($white, .16);
-    box-shadow: inset 0 0 0 1px rgba($black, .04), 0 2px 4px 0 rgba($black, .06);
+    box-shadow: inset 0 0 0 1px rgba($primary, .04), 0 2px 4px 0 rgba($primary, .06);
     border-radius: 4px;
     color: $white;
     display: block;
@@ -254,7 +260,7 @@ $auth-demo-overflow-end: 60px;
 
 .group-example {
   justify-content: center;
-  background-color: mix(rgba($black, .02), $blue, 99%);
+  background-color: mix(rgba($primary, .02), $color-blue, 99%);
   display: flex;
   flex-grow: 1;
   padding-left: 36px;
@@ -282,7 +288,7 @@ $auth-demo-overflow-end: 60px;
 .tip--datademo {
   @include unset-p;
 
-  color: rgba($black, .8);
+  color: rgba($primary, .8);
   font-size: 12px;
   font-weight: 900;
   top: 0;
@@ -309,7 +315,7 @@ $auth-demo-overflow-end: 60px;
 .tip--authdemo {
   @include unset-p;
 
-  color: rgba($black, .8);
+  color: rgba($primary, .8);
   display: none;
   font-size: 12px;
   line-height: 18px;
@@ -351,7 +357,7 @@ $auth-demo-overflow-end: 60px;
   background-image: url("../images/demo-data-container.jpg");
   background-size: 100% 100%;
   border-radius: 4px;
-  box-shadow: 2px 8px 15px 0 rgba($black, .12), 5px 15px 35px 0 rgba($black, .1);
+  box-shadow: 2px 8px 15px 0 rgba($primary, .12), 5px 15px 35px 0 rgba($primary, .1);
   display: flex;
   flex-wrap: wrap;
   padding: 24px;
@@ -391,7 +397,7 @@ $auth-demo-overflow-end: 60px;
   }
 
   & h2 {
-    color: rgba($black, .5);
+    color: rgba($primary, .5);
     font-size: 11px;
     font-weight: 900;
     line-height: 18px;
@@ -399,7 +405,7 @@ $auth-demo-overflow-end: 60px;
   }
 
   & h3 {
-    color: $black;
+    color: $primary;
     font-size: 33px;
     font-weight: 900;
     line-height: 48px;
@@ -422,7 +428,10 @@ $auth-demo-overflow-end: 60px;
 
   & label {
     display: inline-block;
+    font: inherit;
+    margin: 0;
     position: relative;
+    top: 0;
     vertical-align: middle;
     width: 100%;
     z-index: 0;
@@ -441,7 +450,7 @@ $auth-demo-overflow-end: 60px;
     @include normalize-input-type-search;
     @include unset-input;
 
-    color: $black;
+    color: $primary;
     font-size: 13px;
     line-height: 18px;
     padding: 9px 12px;
@@ -455,7 +464,7 @@ $auth-demo-overflow-end: 60px;
 
     &:hover {
       & + span {
-        background: rgba($black, .12);
+        background: rgba($primary, .12);
         border-radius: 6px;
       }
     }
@@ -465,18 +474,18 @@ $auth-demo-overflow-end: 60px;
 
       & + span {
         background: $white;
-        box-shadow: 0 1px 2px 0 rgba($black, .1), 0 1px 6px 0 rgba($black, .1);
+        box-shadow: 0 1px 2px 0 rgba($primary, .1), 0 1px 6px 0 rgba($primary, .1);
         border-radius: 6px;
       }
     }
 
     &::placeholder {
-      color: rgba($black, .5);
+      color: rgba($primary, .5);
     }
   }
 
   & span {
-    background: rgba($black, .08);
+    background: rgba($primary, .08);
     border-radius: 6px;
     content: "";
     display: inline-block;
@@ -521,7 +530,7 @@ $auth-demo-overflow-end: 60px;
   & h4 {
     @include unset-h;
 
-    color: rgba($black, .5);
+    color: rgba($primary, .5);
     font-size: 11px;
     font-weight: 900;
     line-height: 18px;
@@ -535,10 +544,13 @@ $auth-demo-overflow-end: 60px;
 
   & label {
     display: flex;
+    font: inherit;
+    margin: 0;
     position: relative;
+    top: 0;
 
     & span:nth-child(n+3):last-child {
-      color: rgba($black, .5);
+      color: rgba($primary, .5);
       margin-left: auto;
     }
   }
@@ -575,7 +587,7 @@ $auth-demo-overflow-end: 60px;
     height: 100%;
 
     & + span {
-      background: rgba($black, .12);
+      background: rgba($primary, .12);
       border-radius: 3px;
       display: inline-block;
       margin-right: 9px;
@@ -584,13 +596,13 @@ $auth-demo-overflow-end: 60px;
     }
 
     &:hover + span {
-      background-color: rgba($black, .2);
+      background-color: rgba($primary, .2);
     }
 
     &:checked + span {
       background-color: $white;
       border-radius: 3px;
-      box-shadow: 0 1px 2px 0 rgba($black, .1), 0 1px 6px 0 rgba($black, .1);
+      box-shadow: 0 1px 2px 0 rgba($primary, .1), 0 1px 6px 0 rgba($primary, .1);
       display: flex;
       justify-content: center;
 
@@ -605,7 +617,7 @@ $auth-demo-overflow-end: 60px;
 
 .demo-data-sidebar-genre, .demo-data-sidebar-year {
   & ul {
-    color: rgba($black, .7);
+    color: rgba($primary, .7);
     font-size: 12px;
     line-height: 18px;
 
@@ -617,9 +629,12 @@ $auth-demo-overflow-end: 60px;
 
 .demo-data-sidebar-genre {
   & form label {
+    color: inherit;
     display: inline-block;
-    margin-bottom: 18px;
+    font: inherit;
+    margin: 0 0 18px;
     position: relative;
+    top: 0;
     vertical-align: middle;
     width: 100%;
     z-index: 0;
@@ -630,7 +645,7 @@ $auth-demo-overflow-end: 60px;
     @include normalize-input-type-search;
     @include unset-input;
 
-    color: $black;
+    color: $primary;
     font-size: 12px;
     line-height: 18px;
     outline: 0;
@@ -640,7 +655,7 @@ $auth-demo-overflow-end: 60px;
     width: 100%;
 
     &::placeholder {
-      color: rgba($black, .5);
+      color: rgba($primary, .5);
     }
   }
 
@@ -648,7 +663,7 @@ $auth-demo-overflow-end: 60px;
     outline: 0;
 
     & + span {
-      background: rgba($black, .08);
+      background: rgba($primary, .08);
       border-radius: 6px;
       content: "";
       display: inline-block;
@@ -661,8 +676,9 @@ $auth-demo-overflow-end: 60px;
 
       &::before {
         content: url("demo-data-search.svg");
-        top: 2px;
         left: 6px;
+        line-height: 0;
+        top: 6px;
         position: absolute;
         width: 12px;
         height: 12px;
@@ -670,12 +686,12 @@ $auth-demo-overflow-end: 60px;
     }
 
     &:hover + span {
-      background: rgba($black, .12);
+      background: rgba($primary, .12);
     }
 
     &:focus + span {
       background-color: $white;
-      box-shadow: 0 1px 2px 0 rgba($black, .1), 0 1px 6px 0 rgba($black, .1);
+      box-shadow: 0 1px 2px 0 rgba($primary, .1), 0 1px 6px 0 rgba($primary, .1);
     }
   }
 }
@@ -689,7 +705,7 @@ $auth-demo-overflow-end: 60px;
 
   & input:checked + span {
     background-color: $white;
-    box-shadow: 0 1px 2px 0 rgba($black, .1), 0 1px 6px 0 rgba($black, .1);
+    box-shadow: 0 1px 2px 0 rgba($primary, .1), 0 1px 6px 0 rgba($primary, .1);
     margin-left: -6px;
     padding: 3px 6px;
   }
@@ -766,7 +782,7 @@ $auth-demo-overflow-end: 60px;
     @include unset-p;
 
     font-size: 12px;
-    color: rgba($black, .5);
+    color: rgba($primary, .5);
     line-height: 18px;
     margin-bottom: 12px;
   }
@@ -783,7 +799,7 @@ $auth-demo-overflow-end: 60px;
   margin-right: -9px;
 
   & li {
-    box-shadow: 0 2px 3px 0 rgba($black, .2), 0 2px 6px 0 rgba($black, .04);
+    box-shadow: 0 2px 3px 0 rgba($primary, .2), 0 2px 6px 0 rgba($primary, .04);
     margin-bottom: 18px;
     margin-left: 9px;
     margin-right: 9px;
@@ -839,7 +855,7 @@ $auth-demo-overflow-end: 60px;
   }
 
   & li:hover > span {
-    background-color: rgba($black, .6);
+    background-color: rgba($primary, .6);
     opacity: 1  g;
   }
 }
@@ -857,7 +873,7 @@ $auth-demo-overflow-end: 60px;
   & button {
     @include unset-button;
 
-    color: rgba($black, .3);
+    color: rgba($primary, .3);
     cursor: pointer;
     display: block;
     font-size: 13px;
@@ -868,13 +884,13 @@ $auth-demo-overflow-end: 60px;
     padding-right: 6px;
 
     &:hover, &[disabled] {
-      color: rgba($black, .6);
+      color: rgba($primary, .6);
     }
 
     &[disabled] {
       background-color: $white;
       border-radius: 3px;
-      box-shadow: 0 1px 2px 0 rgba($black, .1), 0 1px 6px 0 rgba($black, .1);
+      box-shadow: 0 1px 2px 0 rgba($primary, .1), 0 1px 6px 0 rgba($primary, .1);
     }
   }
 }

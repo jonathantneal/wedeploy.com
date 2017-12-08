@@ -4,7 +4,7 @@
 .pricing {
   @include inset;
 
-  background-color: mix(rgba($black, .02), $blue, 99%);
+  background-color: mix(rgba($black, .02), $color-blue, 99%);
   padding-bottom: 120px;
   padding-top: 96px;
   text-align: center;
@@ -274,8 +274,8 @@
   left: 12px;
   right: 12px;
   position: absolute;
-  width: calc(100% - 24px) calc(60px - 24px);
-  height: calc(100% - 24px) calc(60px - 24px);
+  width: calc(100% - 24px);
+  height: calc(60px - 24px);
 
   @media ($ml-pricing) {
     display: none;

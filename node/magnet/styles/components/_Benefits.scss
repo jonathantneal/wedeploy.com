@@ -4,7 +4,7 @@
 .benefits {
   @include inset;
 
-  background-color: mix(rgba($black, .02), $blue, 99%);
+  background-color: mix(rgba($black, .02), $color-blue, 99%);
   padding-bottom: 120px;
   padding-top: 96px;
 }
